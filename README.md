@@ -9,9 +9,23 @@ The server java program accepts connections and creates a separate thread for th
 ### Instructions to run the program:
 1.    Open two terminals (one for client and one for server).
 2.    On the server terminal, go to the KVServerProject project folder and run the following command:
-      a.mvn clean install
-      b.    java -cp target/KVServer-1.0-SNAPSHOT.jar KVServer executeThis should start the server and you should see message “Server waiting for connections”
+      * mvn clean install
+      * java -cp target/KVServer-1.0-SNAPSHOT.jar KVServer executeThis should start the server and you should see message “Server waiting for connections”
 3.    On the client terminal, go to the KVClientProject project folder and run the following command:
-      a.mvn clean install
-      b.    java -cp target/KVClient-1.0-SNAPSHOT.jar KVClient <mode> <threads> 
-  executeMode 1- interactive mode and mode 2- test case modeIf you run the program in mode 1, you will see “>>” appear on the screen. You can now write your command.If you run the program in mode 2, the testcase execution will start automatically and you will see bunch of commands printed on the screen (these are outputs of the commands being fired.)Note: To switch modes, you will have to kill the program and run in again with different command line arguments.
+      * mvn clean install
+      * java -cp target/KVClient-1.0-SNAPSHOT.jar KVClient <mode> <threads> 
+  executeMode 1- interactive mode and mode 2- test case mode. If you run the program in mode 1, you will see “>>” appear on the screen. You can now write your command.If you run the program in mode 2, the testcase execution will start automatically and you will see bunch of commands printed on the screen (these are outputs of the commands being fired.)
+      Note: To switch modes, you will have to kill the program and run in again with different command line arguments.
+
+### Limitations of the server:
+1.    The key and value each cannot be greater than 250 bytes. 
+2.    The key and values can only be strings without any special character. Other formats cannot be used.
+
+### Error Handling:
+1.    I have handled IOExceptions and Socket exceptions.
+2.    The code has conditions to check if the valid input has been entered. Appropriate error message will be shown. (Example: if the set command is typed as “set loc Bloomington”, error message “Size should be numeric value” is printed)
+
+### Improvements:
+1.    Key and values can be more complex strings(with special characters) or of other formats too
+2.    Just like the original memcache implementation, extra fields like expiry time etc can be added. Based on the expiry time, old/stale entries can be removed to create more space for caching newly incoming requests.
+3.    LRU policy can be implemented to remove the old/stale entries to improve efficiency.
